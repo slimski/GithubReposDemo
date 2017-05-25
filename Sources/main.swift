@@ -12,7 +12,7 @@ if let username = readLine() {
     
     print("sending request to github...")
     print()
-    let task = Alamofire.request(url).responseJSON(queue: DispatchQueue.global()) { response in
+    Alamofire.request(url).responseJSON(queue: DispatchQueue.global()) { response in
         if let error = response.result.error as? AFError {
             print(error)
             semaphore.signal()
@@ -46,6 +46,5 @@ if let username = readLine() {
         
     }
     
-    task.resume()
     semaphore.wait()
 }
